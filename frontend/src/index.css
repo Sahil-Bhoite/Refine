@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  background: #f8fafc !important; /* Tailwind's gray-50 */
+  min-height: 100vh;
+}
+
+.glass-card {
+  @apply bg-[rgba(255,255,255,0.7)] backdrop-blur-md border border-white/20 shadow-lg;
+}
+
+.glass-dark {
+  @apply bg-[rgba(15,23,42,0.7)] backdrop-blur-md border border-gray-700/20;
+}
+
+.glass-input {
+  @apply bg-white/10 backdrop-blur-sm border border-white/20 focus:border-white/30 focus:bg-white/20 transition-all duration-200;
+}

@@ -1,0 +1,14 @@
+# Ignore Node.js dependencies
+node_modules/
+dist/
+build/
+
+# Ignore Python virtual environments
+venv/
+__pycache__/
+
+# Ignore environment variables file
+.env
+
+# Ignore macOS specific files
+.DS_Store
