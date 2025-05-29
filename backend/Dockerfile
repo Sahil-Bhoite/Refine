@@ -16,6 +16,4 @@ COPY . .
 # Expose the port the app runs on
 EXPOSE 8000
 
-# Run the application using Gunicorn
-# Gunicorn is a production-ready ASGI server
-CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "app.main:app", "--bind", "0.0.0.0:8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
