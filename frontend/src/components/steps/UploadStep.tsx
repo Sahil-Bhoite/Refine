@@ -57,6 +57,9 @@ const UploadStep: React.FC<UploadStepProps> = ({ onComplete }) => {
           <CardDescription>
             Upload your resume and paste the job description you're targeting
           </CardDescription>
+          <p className="text-sm text-gray-500 italic mt-2">
+            Get the most out of your resume! Refine analyzes your content against job descriptions to suggest impactful, honest improvements to best showcase your qualification.
+          </p>
         </CardHeader>
         
         <CardContent className="space-y-6">
