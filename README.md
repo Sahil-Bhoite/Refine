@@ -9,8 +9,9 @@ Refine is a full-stack web application that leverages the power of AI to help us
 *   **Step-by-Step Process:** A clear, guided workflow from uploading your documents to viewing the refined resume.
 
 ## Application Screenshots
+Results<img width="1552" alt="Screenshot 2025-05-30 at 12 07 11 PM" src="https://github.com/user-attachments/assets/cc6d305b-1b7e-4673-ba8a-377f1440cc79" />
 
-### Resume Evaluation Results<img width="1552" alt="Screenshot 2025-05-30 at 12 07 24 PM" src="https://github.com/user-attachments/assets/e3925aab-83e6-436b-abc2-b10ae7b0c096" />
+### Resume Evaluation 
 
 
 The evaluation screen provides detailed insights into how well your resume matches the target job description. Users receive:
@@ -30,10 +31,11 @@ The evaluation screen provides detailed insights into how well your resume match
 
 ### AI-Optimized Resume 
 
-Results<img width="1552" alt="Screenshot 2025-05-30 at 12 07 11 PM" src="https://github.com/user-attachments/assets/cc6d305b-1b7e-4673-ba8a-377f1440cc79" />
 
 
 After the AI refinement process, users can review their optimized resume with:
+
+Results<img width="1552" alt="Screenshot 2025-05-30 at 12 07 24 PM" src="https://github.com/user-attachments/assets/e3925aab-83e6-436b-abc2-b10ae7b0c096" />
 
 - **Improvement Summary**: Detailed explanation of changes made to enhance clarity and impact
 - **Before/After Comparison**: 
