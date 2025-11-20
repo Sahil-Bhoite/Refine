@@ -1,16 +1,20 @@
 import React from 'react';
 import { cn } from '../../lib/utils';
+import { motion, HTMLMotionProps } from 'framer-motion';
 
-type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'glass';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+// Combine Framer Motion props with standard button props
+interface ButtonProps extends Omit<HTMLMotionProps<"button">, "children"> {
+  children: React.ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
   isLoading?: boolean;
   fullWidth?: boolean;
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
+  glow?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -24,41 +28,49 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     icon,
     iconPosition = 'left',
     disabled,
+    glow = false,
     ...props
   }, ref) => {
     // Base styles
-    const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none';
+    const baseStyles = 'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden';
     
     // Variant styles
     const variantStyles = {
-      primary: 'bg-primary-600 text-white hover:bg-primary-700 active:bg-primary-800',
-      secondary: 'bg-secondary-600 text-white hover:bg-secondary-700 active:bg-secondary-800',
-      outline: 'border border-gray-300 bg-transparent hover:bg-gray-50 active:bg-gray-100 text-gray-700',
-      ghost: 'bg-transparent hover:bg-gray-100 active:bg-gray-200 text-gray-700',
-      link: 'bg-transparent underline-offset-4 hover:underline text-primary-600 hover:text-primary-700',
+      primary: 'bg-primary hover:bg-primary-600 text-white shadow-lg shadow-primary/25 border border-primary/50',
+      secondary: 'bg-secondary-mint text-neutral-900 hover:bg-secondary-mint/90 shadow-lg shadow-secondary-mint/25',
+      outline: 'border border-glass-border bg-transparent hover:bg-glass-highlight text-white',
+      ghost: 'bg-transparent hover:bg-white/5 text-neutral-300 hover:text-white',
+      link: 'bg-transparent underline-offset-4 hover:underline text-primary-400 hover:text-primary-300',
+      glass: 'glass-button text-white hover:text-white',
     };
     
     // Size styles
     const sizeStyles = {
-      sm: 'text-sm px-3 py-1.5 h-8',
-      md: 'text-sm px-4 py-2 h-10',
-      lg: 'text-base px-6 py-3 h-12',
+      sm: 'text-xs px-3 py-1.5 h-8',
+      md: 'text-sm px-5 py-2.5 h-11',
+      lg: 'text-base px-8 py-3.5 h-14',
     };
     
     // Width style
     const widthStyle = fullWidth ? 'w-full' : '';
+
+    // Glow effect
+    const glowStyle = glow ? 'shadow-glow-primary' : '';
     
     return (
-      <button
+      <motion.button
         ref={ref}
         className={cn(
           baseStyles,
           variantStyles[variant],
           sizeStyles[size],
           widthStyle,
+          glowStyle,
           className
         )}
         disabled={isLoading || disabled}
+        whileHover={{ scale: disabled ? 1 : 1.02 }}
+        whileTap={{ scale: disabled ? 1 : 0.98 }}
         {...props}
       >
         {isLoading && (
@@ -93,7 +105,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {icon && iconPosition === 'right' && (
           <span className="ml-2">{icon}</span>
         )}
-      </button>
+      </motion.button>
     );
   }
 );

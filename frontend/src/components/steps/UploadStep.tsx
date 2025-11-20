@@ -57,38 +57,39 @@ const UploadStep: React.FC<UploadStepProps> = ({ onComplete }) => {
           <CardDescription>
             Upload your resume and paste the job description you're targeting
           </CardDescription>
-          <p className="text-sm text-gray-500 italic mt-2">
-            Get the most out of your resume! Refine analyzes your content against job descriptions to suggest impactful, honest improvements to best showcase your qualification.
-          </p>
+          <div className="mt-4 p-4 bg-primary-500/10 border border-primary-500/20 rounded-lg">
+            <p className="text-sm text-primary-200">
+              <span className="font-semibold text-primary-400">Tip:</span> Refine analyzes your content against job descriptions to suggest impactful, honest improvements to best showcase your qualifications.
+            </p>
+          </div>
         </CardHeader>
         
-        <CardContent className="space-y-6">
-          <div>
-            <div className="flex items-center space-x-4 mb-4">
-              <button
-                type="button"
-                onClick={() => setUploadType('file')}
-                className={`flex items-center px-4 py-2 rounded-md text-sm font-medium ${
-                  uploadType === 'file'
-                    ? 'bg-primary-100 text-primary-800 border border-primary-200'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                <Upload className="h-4 w-4 mr-2" />
-                Upload .tex File
-              </button>
-              
+        <CardContent className="space-y-8">
+          <div className="space-y-4">
+            <div className="flex p-1 bg-neutral-800 border border-white/10 rounded-lg w-fit">
               <button
                 type="button"
                 onClick={() => setUploadType('text')}
-                className={`flex items-center px-4 py-2 rounded-md text-sm font-medium ${
+                className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all ${
                   uploadType === 'text'
-                    ? 'bg-primary-100 text-primary-800 border border-primary-200'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-neutral-700 text-white shadow-sm'
+                    : 'text-neutral-400 hover:text-white'
                 }`}
               >
                 <ClipboardCheck className="h-4 w-4 mr-2" />
                 Paste LaTeX Code
+              </button>
+              <button
+                type="button"
+                onClick={() => setUploadType('file')}
+                className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  uploadType === 'file'
+                    ? 'bg-neutral-700 text-white shadow-sm'
+                    : 'text-neutral-400 hover:text-white'
+                }`}
+              >
+                <Upload className="h-4 w-4 mr-2" />
+                Upload .tex File
               </button>
             </div>
             

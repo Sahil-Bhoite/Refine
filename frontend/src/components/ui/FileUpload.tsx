@@ -91,15 +91,17 @@ const FileUpload: React.FC<FileUploadProps> = ({
   return (
     <div className={cn('w-full', className)}>
       {label && (
-        <p className="block text-sm font-medium text-gray-700 mb-1">{label}</p>
+        <p className="block text-sm font-medium text-neutral-300 mb-1.5">{label}</p>
       )}
       
       <div
         className={cn(
-          'flex flex-col items-center justify-center w-full border-2 border-dashed rounded-lg p-6 transition-colors cursor-pointer',
-          dragActive ? 'border-primary-500 bg-primary-50' : 'border-gray-300 hover:border-primary-400',
-          selectedFile ? 'bg-gray-50' : 'bg-white',
-          (error || fileError) && 'border-error-300'
+          'flex flex-col items-center justify-center w-full border-2 border-dashed rounded-xl p-8 transition-all cursor-pointer',
+          dragActive 
+            ? 'border-primary-500 bg-primary-500/10' 
+            : 'border-white/10 hover:border-primary-400/50 hover:bg-white/5',
+          selectedFile ? 'bg-white/5 border-primary-500/50' : 'bg-transparent',
+          (error || fileError) && 'border-red-500/50 bg-red-500/5'
         )}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -118,15 +120,17 @@ const FileUpload: React.FC<FileUploadProps> = ({
         {selectedFile ? (
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center">
-              <File className="h-8 w-8 text-primary-600 mr-3" />
+              <div className="p-3 rounded-lg bg-neutral-800 border border-white/10 mr-4">
+                <File className="h-6 w-6 text-primary-400" />
+              </div>
               <div>
-                <p className="text-sm font-medium text-gray-700">{selectedFile.name}</p>
-                <p className="text-xs text-gray-500">{(selectedFile.size / 1024).toFixed(1)} KB</p>
+                <p className="text-sm font-medium text-white">{selectedFile.name}</p>
+                <p className="text-xs text-neutral-400">{(selectedFile.size / 1024).toFixed(1)} KB</p>
               </div>
             </div>
             <button
               type="button"
-              className="text-gray-500 hover:text-gray-700 p-1 rounded-full hover:bg-gray-100"
+              className="text-neutral-400 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors"
               onClick={(e) => {
                 e.stopPropagation();
                 handleRemoveFile();
@@ -137,11 +141,13 @@ const FileUpload: React.FC<FileUploadProps> = ({
           </div>
         ) : (
           <>
-            <Upload className="h-10 w-10 text-gray-400 mb-3" />
-            <p className="text-sm text-gray-700 font-medium">
-              Drag & drop your .tex file here or <span className="text-primary-600">browse</span>
+            <div className="p-4 rounded-full bg-white/5 mb-4">
+              <Upload className="h-8 w-8 text-neutral-400" />
+            </div>
+            <p className="text-sm text-neutral-300 font-medium">
+              Drag & drop your .tex file here or <span className="text-primary-400 hover:underline">browse</span>
             </p>
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-2 text-xs text-neutral-500">
               LaTeX (.tex) files only, max {maxSize / (1024 * 1024)}MB
             </p>
           </>
@@ -151,7 +157,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
       {(hint || error || fileError) && (
         <p className={cn(
           'mt-2 text-sm',
-          (error || fileError) ? 'text-error-600' : 'text-gray-500'
+          (error || fileError) ? 'text-red-400' : 'text-neutral-500'
         )}>
           {error || fileError || hint}
         </p>

@@ -14,7 +14,7 @@ export async function evaluateResume(resumeLatexCode: string, jobDescription: st
   formData.append("job_description", jobDescription);
   formData.append("resume_latex_code", resumeLatexCode);
 
-  const response = await fetch(`${API_BASE}/api/evaluate_resume`, {
+  const response = await fetch(`${API_BASE}/evaluate`, {
     method: "POST",
     body: formData,
   });
@@ -86,7 +86,7 @@ export function mapEvaluationOutputToResult(backend: any): import("./types").Eva
 
 // Real API call to backend for refinement
 export async function refineResume(resumeText: string, jobDescription: string, evaluationResult: any) {
-  const response = await fetch(`${API_BASE}/api/refine_resume`, {
+  const response = await fetch(`${API_BASE}/refine`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

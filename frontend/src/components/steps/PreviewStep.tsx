@@ -33,36 +33,48 @@ const PreviewStep: React.FC<PreviewStepProps> = ({
         </CardHeader>
         
         <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="text-lg font-medium mb-3 flex items-center">
-                <FileText className="h-5 w-5 mr-2 text-primary-600" />
-                Your Resume (LaTeX)
-              </h3>
-              <div className="border rounded-md p-4 bg-gray-50 min-h-[500px] max-h-[500px] h-[500px] overflow-y-auto flex items-start">
-                {/* Use Editor for syntax highlighting */}
-                <Editor
-                  value={resumeText || 'No LaTeX code provided.'}
-                  highlight={code => highlight(code, languages.latex, 'latex')}
-                  padding={10}
-                  style={{
-                    fontFamily: '"Fira code", "Fira Mono", Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace',
-                    fontSize: 14,
-                    width: '100%', // Ensure it takes full width
-                    minHeight: '100%', // Ensure it takes full height
-                  }}
-                  readOnly // Make it read-only for preview
-                  onValueChange={() => {}} // Add empty onValueChange prop
-                />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="flex flex-col h-full">
+              <div className="bg-white/5 rounded-t-xl border border-b-0 border-white/10 px-4 py-3 flex items-center justify-between backdrop-blur-sm">
+                <h3 className="text-sm font-semibold text-white flex items-center uppercase tracking-wider">
+                  <FileText className="h-4 w-4 mr-2 text-primary-400" />
+                  Resume (LaTeX)
+                </h3>
+                <span className="text-xs text-neutral-400 bg-white/5 px-2 py-1 rounded border border-white/10">Read-only</span>
+              </div>
+              <div className="border border-white/10 rounded-b-xl bg-neutral-900/50 flex-grow overflow-hidden relative group">
+                <div className="absolute inset-0 overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent p-1">
+                  <Editor
+                    value={resumeText || 'No LaTeX code provided.'}
+                    highlight={code => highlight(code, languages.latex, 'latex')}
+                    padding={16}
+                    style={{
+                      fontFamily: '"JetBrains Mono", "Fira Code", monospace',
+                      fontSize: 13,
+                      backgroundColor: 'transparent',
+                      minHeight: '100%',
+                      color: '#e2e8f0' // Text color for editor
+                    }}
+                    className="min-h-[500px]"
+                    readOnly
+                    onValueChange={() => {}}
+                  />
+                </div>
               </div>
             </div>
             
-            <div>
-              <h3 className="text-lg font-medium mb-3">Job Description</h3>
-              <div className="border rounded-md p-4 bg-gray-50 min-h-[500px] max-h-[500px] h-[500px] overflow-y-auto flex items-start">
-                <pre className="text-sm whitespace-pre-wrap text-gray-700 w-full">
-                  {jobDescription || 'No job description provided.'}
-                </pre>
+            <div className="flex flex-col h-full">
+              <div className="bg-white/5 rounded-t-xl border border-b-0 border-white/10 px-4 py-3 backdrop-blur-sm">
+                <h3 className="text-sm font-semibold text-white uppercase tracking-wider">Target Job Description</h3>
+              </div>
+              <div className="border border-white/10 rounded-b-xl bg-neutral-900/50 p-5 h-[500px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent shadow-inner">
+                <div className="prose prose-sm max-w-none text-neutral-300 leading-relaxed prose-invert">
+                  {jobDescription ? (
+                    <pre className="whitespace-pre-wrap font-sans text-sm bg-transparent text-neutral-300">{jobDescription}</pre>
+                  ) : (
+                    <p className="text-neutral-500 italic">No job description provided.</p>
+                  )}
+                </div>
               </div>
             </div>
           </div>

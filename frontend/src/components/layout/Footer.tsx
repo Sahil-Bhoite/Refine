@@ -1,28 +1,24 @@
 import React from 'react';
+import { FileText, Twitter, Linkedin, Github } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="glass-card mt-auto border-t border-white/20">
-      <div className="max-w-7xl mx-auto px-6 py-6">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-4 md:mb-0">
-            <p className="text-sm text-gray-600">
-              © {new Date().getFullYear()} Refine. All rights reserved.
-            </p>
+    <footer className="bg-neutral-900 border-t border-white/5 py-8">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="flex items-center space-x-2">
+          <div className="bg-gradient-to-br from-primary-500 to-primary-700 p-1.5 rounded-lg">
+            <FileText className="h-4 w-4 text-white" />
           </div>
-          
-          <div className="flex items-center space-x-4">
-            <a href="#" className="text-sm text-gray-600 hover:text-primary-600 transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-sm text-gray-600 hover:text-primary-600 transition-colors">
-              Terms of Service
-            </a>
-            <div className="flex items-center">
-              <span className="text-xs text-gray-500 mr-1">Powered by</span>
-              <span className="text-sm font-medium text-gray-700">OpenAI</span>
-            </div>
-          </div>
+          <span className="text-lg font-display font-bold text-white">Refine</span>
+        </div>
+        
+        <p className="text-sm text-neutral-600">
+        </p>
+        
+        <div className="flex space-x-4">
+          <a href="https://github.com/Sahil-Bhoite/Refine" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
+            <Github size={20} />
+          </a>
         </div>
       </div>
     </footer>

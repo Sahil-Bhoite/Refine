@@ -1,30 +1,42 @@
 import React from 'react';
 import { cn } from '../../lib/utils';
+import { motion, HTMLMotionProps } from 'framer-motion';
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+interface CardProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
-  variant?: 'default' | 'bordered';
+  variant?: 'default' | 'glass' | 'glass-dark';
+  hoverEffect?: boolean;
 }
 
-const Card = ({
+const Card = React.forwardRef<HTMLDivElement, CardProps>(({
   children,
   className,
-  variant = 'default',
+  variant = 'glass',
+  hoverEffect = false,
   ...props
-}: CardProps) => {
+}, ref) => {
+  const variantStyles = {
+    default: 'bg-white shadow-xl rounded-xl border border-neutral-100',
+    glass: 'glass-card rounded-xl',
+    'glass-dark': 'bg-neutral-charcoal/80 backdrop-blur-md border border-white/10 shadow-xl rounded-xl',
+  };
+
   return (
-    <div
+    <motion.div
+      ref={ref}
       className={cn(
-        'glass-card rounded-xl overflow-hidden',
-        variant === 'default' ? 'shadow-xl' : 'border border-white/20',
+        variantStyles[variant],
+        'overflow-hidden',
         className
       )}
+      whileHover={hoverEffect ? { y: -5, transition: { duration: 0.2 } } : {}}
       {...props}
     >
       {children}
-    </div>
+    </motion.div>
   );
-};
+});
+Card.displayName = "Card";
 
 interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -37,7 +49,7 @@ const CardHeader = ({
 }: CardHeaderProps) => {
   return (
     <div
-      className={cn('p-6 border-b border-white/10', className)}
+      className={cn('p-6 border-b border-white/5', className)}
       {...props}
     >
       {children}
@@ -56,7 +68,7 @@ const CardTitle = ({
 }: CardTitleProps) => {
   return (
     <h3
-      className={cn('text-lg font-semibold text-gray-900', className)}
+      className={cn('text-xl font-display font-bold text-white', className)}
       {...props}
     >
       {children}
@@ -75,7 +87,7 @@ const CardDescription = ({
 }: CardDescriptionProps) => {
   return (
     <p
-      className={cn('text-sm text-gray-600 mt-1', className)}
+      className={cn('text-sm text-neutral-silver mt-2 leading-relaxed', className)}
       {...props}
     >
       {children}
@@ -113,7 +125,7 @@ const CardFooter = ({
 }: CardFooterProps) => {
   return (
     <div
-      className={cn('p-6 bg-black/5 backdrop-blur-sm border-t border-white/10', className)}
+      className={cn('p-6 border-t border-white/5', className)}
       {...props}
     >
       {children}
