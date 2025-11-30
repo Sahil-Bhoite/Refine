@@ -2,7 +2,7 @@ import React from 'react';
 import Section from '../ui/Section';
 import Button from '../ui/Button';
 import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { Github, Globe, Sparkles } from 'lucide-react';
 
 interface CTASectionProps {
   onStart?: () => void;
@@ -35,7 +35,7 @@ const CTASection: React.FC<CTASectionProps> = ({ onStart }) => {
           transition={{ delay: 0.1 }}
           className="text-xl text-neutral-200 mb-10 max-w-2xl mx-auto"
         >
-          Stop getting rejected by bots. Start optimizing your resume with AI hiring intelligence today.
+          This application is currently restricted. To use it, you can clone the repository and set up your own Gemini API key, or contact the developer for access.
         </motion.p>
         
         <motion.div 
@@ -45,12 +45,16 @@ const CTASection: React.FC<CTASectionProps> = ({ onStart }) => {
           transition={{ delay: 0.2 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Button size="lg" glow icon={<Sparkles size={20} />} iconPosition="left" onClick={onStart}>
-            Optimize My Resume Now
-          </Button>
-          <Button variant="outline" size="lg" className="bg-white/5 backdrop-blur-sm border-white/20 hover:bg-white/10">
-            View Sample Resume
-          </Button>
+          <a href="https://github.com/Sahil-Bhoite/Refine" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" glow icon={<Github size={20} />} iconPosition="left">
+              Clone on GitHub
+            </Button>
+          </a>
+          <a href="https://sahil-bhoite.github.io/Website/" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="lg" className="bg-white/5 backdrop-blur-sm border-white/20 hover:bg-white/10" icon={<Globe size={20} />} iconPosition="left">
+              Contact Developer
+            </Button>
+          </a>
         </motion.div>
 
         <motion.div 
@@ -60,7 +64,7 @@ const CTASection: React.FC<CTASectionProps> = ({ onStart }) => {
           transition={{ delay: 0.4 }}
           className="mt-12 text-sm text-neutral-400"
         >
-          No credit card required for trial • Instant PDF & LaTeX download
+          Self-host with your own API Key • Request Access
         </motion.div>
       </div>
     </Section>

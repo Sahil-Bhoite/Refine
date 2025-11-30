@@ -16,8 +16,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-from app.routers import resume_processing
+from app.routers import resume_processing, auth
+from app.database import engine
+from app.models import user
+
+# Create tables
+user.Base.metadata.create_all(bind=engine)
+
 app.include_router(resume_processing.router)
+app.include_router(auth.router, tags=["auth"])
 
 @app.get("/")
 def read_root():

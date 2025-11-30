@@ -100,7 +100,7 @@ You are a perfectionist resume writer with an eye for detail and a deep understa
 - **Preserve High Scores**: If a section (e.g., Experience, Education) already scores high (>= 90), DO NOT make substantial changes unless it directly addresses a specific gap mentioned in the evaluation.
 - **Targeted Improvements**: Focus ONLY on areas with scores < 90. Do not rewrite sections that are already strong just for the sake of rewriting.
 - **Skills/Techstack**: Add missing skills from the JD if they are relevant to the candidate's background.
-- **ExprieDcci Dtsoriptions**: Rewiittebubult poie totocun eiyanheohnicl ywrdahvntsfunt JD
+- **Experience Descriptions**: Rewrite bullet points to focus on technical keywords and relevant functional JD requirements.
 - **Conservative Inferences**: Ensure all enhancements are directly supported by the existing resume content. Do not make assumptions beyond what is explicitly stated or reasonably implied.
 
 ### Job Description:

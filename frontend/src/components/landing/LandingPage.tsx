@@ -3,8 +3,6 @@ import HeroSection from './HeroSection';
 import HowItWorksSection from './HowItWorksSection';
 import FeaturesSection from './FeaturesSection';
 import DemoSection from './DemoSection';
-import TestimonialsSection from './TestimonialsSection';
-import PricingSection from './PricingSection';
 import FAQSection from './FAQSection';
 import CTASection from './CTASection';
 
@@ -26,11 +24,6 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart }) => {
       </div>
       
       <DemoSection />
-      <TestimonialsSection />
-      
-      <div id="pricing">
-        <PricingSection />
-      </div>
       
       <div id="faq">
         <FAQSection />

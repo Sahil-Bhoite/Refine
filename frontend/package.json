@@ -17,6 +17,7 @@
     "@react-pdf/renderer": "^3.1.14",
     "clsx": "^2.0.0",
     "framer-motion": "^12.23.24",
+    "jwt-decode": "^4.0.0",
     "lucide-react": "^0.344.0",
     "pdfjs-dist": "^5.1.91",
     "prismjs": "^1.30.0",

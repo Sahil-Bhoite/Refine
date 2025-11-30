@@ -32,7 +32,19 @@ export interface RefinementResult {
   overallImprovementsSummary?: string;
 }
 
+export interface User {
+  id: number;
+  email: string;
+  full_name?: string;
+  is_google_user: boolean;
+  picture?: string;
+  is_admin?: boolean;
+  is_pro?: boolean;
+  resume_latex?: string;
+}
+
 export interface AppState {
+  user: User | null;
   currentStep: Step;
   originalResume: ResumeData | null;
   jobDescription: string;

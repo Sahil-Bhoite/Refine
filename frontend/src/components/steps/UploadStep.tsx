@@ -7,10 +7,11 @@ import { Upload, ClipboardCheck, ArrowRight } from 'lucide-react';
 
 interface UploadStepProps {
   onComplete: (resumeText: string, resumeFile: File | null, jobDescription: string) => void;
+  savedResume?: string;
 }
 
-const UploadStep: React.FC<UploadStepProps> = ({ onComplete }) => {
-  const [resumeText, setResumeText] = useState('');
+const UploadStep: React.FC<UploadStepProps> = ({ onComplete, savedResume }) => {
+  const [resumeText, setResumeText] = useState(savedResume || '');
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [jobDescription, setJobDescription] = useState('');
   const [uploadType, setUploadType] = useState<'file' | 'text'>('text');

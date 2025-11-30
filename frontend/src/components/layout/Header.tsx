@@ -1,14 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Menu, X } from 'lucide-react';
+import { FileText, Menu, X, User as UserIcon, LogOut } from 'lucide-react';
 import Button from '../ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../lib/utils';
+import { User, Step } from '../../lib/types';
 
 interface HeaderProps {
   onStart?: () => void;
+  user?: User | null;
+  onLoginClick?: () => void;
+  onLogout?: () => void;
+  onProfileClick?: () => void;
+  mode?: 'landing' | 'app';
+  currentStep?: Step;
+  onStepClick?: (step: Step) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onStart }) => {
+const Header: React.FC<HeaderProps> = ({ 
+  onStart, 
+  user, 
+  onLoginClick, 
+  onLogout, 
+  onProfileClick, 
+  mode = 'landing',
+  currentStep,
+  onStepClick
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -20,11 +37,17 @@ const Header: React.FC<HeaderProps> = ({ onStart }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
+  const landingLinks = [
     { name: 'Features', href: '#features' },
     { name: 'How it Works', href: '#how-it-works' },
-    { name: 'Pricing', href: '#pricing' },
     { name: 'FAQ', href: '#faq' },
+  ];
+
+  const appSteps: { id: Step; label: string }[] = [
+    { id: 'upload', label: 'Upload' },
+    { id: 'preview', label: 'Preview' },
+    { id: 'evaluation', label: 'Evaluation' },
+    { id: 'refinement', label: 'Refinement' },
   ];
 
   return (
@@ -50,21 +73,66 @@ const Header: React.FC<HeaderProps> = ({ onStart }) => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href}
-                className="text-sm font-medium text-neutral-silver/70 hover:text-white transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
+            {mode === 'landing' ? (
+              landingLinks.map((link) => (
+                <a 
+                  key={link.name} 
+                  href={link.href}
+                  className="text-sm font-medium text-neutral-silver/70 hover:text-white transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))
+            ) : (
+              appSteps.map((step) => (
+                <button
+                  key={step.id}
+                  onClick={() => onStepClick && onStepClick(step.id)}
+                  className={cn(
+                    "text-sm font-medium transition-colors",
+                    currentStep === step.id 
+                      ? "text-white font-bold" 
+                      : "text-neutral-silver/50 hover:text-neutral-silver"
+                  )}
+                  disabled={!onStepClick} // Or implement validation logic
+                >
+                  {step.label.toUpperCase()}
+                </button>
+              ))
+            )}
           </nav>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <a href="#" className="text-sm font-medium text-white hover:text-primary-400 transition-colors">Log In</a>
-            <Button size="sm" glow onClick={onStart}>Get Started</Button>
+            {user ? (
+                <div className="flex items-center gap-4">
+                    <button 
+                        onClick={onProfileClick}
+                        className="text-sm font-medium text-white flex items-center gap-2 hover:text-primary-400 transition-colors"
+                    >
+                        {user.picture ? (
+                            <img src={user.picture} alt={user.full_name || user.email} className="w-6 h-6 rounded-full" />
+                        ) : (
+                            <UserIcon className="w-4 h-4" />
+                        )}
+                        {user.full_name || user.email}
+                    </button>
+                    <Button size="sm" variant="outline" onClick={onLogout}>
+                        <LogOut className="w-4 h-4 mr-2" />
+                        Logout
+                    </Button>
+                </div>
+            ) : (
+                <>
+                    <button 
+                        onClick={onLoginClick} 
+                        className="text-sm font-medium text-white hover:text-primary-400 transition-colors"
+                    >
+                        Log In
+                    </button>
+                    <Button size="sm" glow onClick={onStart}>Get Started</Button>
+                </>
+            )}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -87,18 +155,42 @@ const Header: React.FC<HeaderProps> = ({ onStart }) => {
             className="md:hidden bg-neutral-charcoal border-b border-white/10 overflow-hidden"
           >
             <div className="flex flex-col p-6 space-y-4">
-              {navLinks.map((link) => (
-                <a 
-                  key={link.name} 
-                  href={link.href}
-                  className="text-base font-medium text-neutral-silver/80 hover:text-white py-2 border-b border-white/5"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </a>
-              ))}
+              {mode === 'landing' ? (
+                landingLinks.map((link) => (
+                  <a 
+                    key={link.name} 
+                    href={link.href}
+                    className="text-base font-medium text-neutral-silver/80 hover:text-white py-2 border-b border-white/5"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                ))
+              ) : (
+                 appSteps.map((step) => (
+                  <button
+                    key={step.id}
+                    onClick={() => {
+                        if(onStepClick) onStepClick(step.id);
+                        setMobileMenuOpen(false);
+                    }}
+                    className={cn(
+                      "text-base font-medium text-left py-2 border-b border-white/5",
+                      currentStep === step.id 
+                        ? "text-white" 
+                        : "text-neutral-silver/50"
+                    )}
+                  >
+                    {step.label}
+                  </button>
+                ))
+              )}
               <div className="pt-4 flex flex-col gap-3">
-                <Button variant="outline" fullWidth>Log In</Button>
+                {user ? (
+                    <Button variant="outline" fullWidth onClick={onLogout}>Logout</Button>
+                ) : (
+                    <Button variant="outline" fullWidth onClick={onLoginClick}>Log In</Button>
+                )}
                 <Button fullWidth glow onClick={() => {
                   setMobileMenuOpen(false);
                   if (onStart) onStart();
