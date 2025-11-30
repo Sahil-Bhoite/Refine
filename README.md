@@ -2,6 +2,8 @@
 
 Refine is a full-stack web application that leverages the power of AI to help users evaluate and optimize their resumes based on specific job descriptions. Users can upload their resume (in LaTeX format) and a job description, receive a detailed evaluation with scores and feedback for different sections, and get a refined version of their resume aimed at better alignment with the job requirements.
 
+<img width="1552" height="921" alt="Screenshot 2025-11-30 at 3 59 45 PM" src="https://github.com/user-attachments/assets/f35e6292-3a2a-4871-8d24-a008b5a5b98b" />
+
 ## Features
 
 *   **Resume Evaluation:** Get a score and detailed feedback on how well your resume matches a job description across various categories (Experience, Skills, Projects, Education, etc.).
@@ -13,6 +15,7 @@ Refine is a full-stack web application that leverages the power of AI to help us
 
 ### Resume Evaluation 
 
+<img width="1552" height="921" alt="Screenshot 2025-11-30 at 4 04 05 PM" src="https://github.com/user-attachments/assets/d2755556-884a-4841-a714-e8c9f7b26dd6" />
 
 The evaluation screen provides detailed insights into how well your resume matches the target job description. Users receive:
 
@@ -32,6 +35,7 @@ The evaluation screen provides detailed insights into how well your resume match
 ### AI-Optimized Resume 
 
 
+<img width="1552" height="921" alt="Screenshot 2025-11-30 at 4 06 48 PM" src="https://github.com/user-attachments/assets/ab938e00-4634-4525-9126-85ed6443b83b" />
 
 After the AI refinement process, users can review their optimized resume with:
 
